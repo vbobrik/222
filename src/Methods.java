@@ -59,7 +59,6 @@ abstract public class Methods {
 
          switch(text) {
              case "!":
-                 System.out.println("The End");
             break;
             default:
             System.out.println("--------------*****---------");
