@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 abstract public class Methods {
-    private String text = "";
+    private String text;
     private static final String FILE_PATH = "resources/words.txt";
     Scanner scanner = new Scanner(System.in);
 
@@ -14,23 +14,21 @@ abstract public class Methods {
                 "2. Read from console");
     }
 
-     public void readFile() throws FileNotFoundException {
-         File file = new File(FILE_PATH);
+    public void readFile() throws FileNotFoundException {
+        File file = new File(FILE_PATH);
+        Scanner scan = new Scanner(file);
+        while (scan.hasNext()) {
+            text = text + scan.next() + " ";
+        }
+    }
 
-         //File file = new File("/Users/Valentina/IdeaProjects/HWtypeLetters/resources/class.txt");
-         Scanner scan = new Scanner(file);
-         while (scan.hasNext()) {
-             text = text + scan.next() + " ";
-         }
-     }
-
-     public void readConsole() {
-         System.out.println("Please, input text for next step");
-         text = scanner.nextLine();
-     }
+    public void readConsole() {
+        System.out.println("Please, input text for next step");
+        text = scanner.nextLine();
+    }
 
     public void findLetter() {
-        boolean q = false;
+        boolean isMatched = false;
         do {
             System.out.println("Enter one letter and I'll find it into the text");
             String x = scanner.nextLine();
@@ -45,24 +43,24 @@ abstract public class Methods {
             System.out.println("Finded words: ");
 
             for (String word : savedText) {
-                if (word.contains(x)) {
+                if (word.toLowerCase().contains(x)) {
                     System.out.println(word);
-                    q = true;
+                    isMatched = true;
                 }
 
             }
 
-            if (!q) {
+            if (!isMatched) {
                 System.out.println("Whoops!\nMatches are absent!");
             }
-        } while (!q);
+        } while (!isMatched);
 
-         switch(text) {
-             case "!":
-            break;
+        switch (text) {
+            case "!":
+                break;
             default:
-            System.out.println("--------------*****---------");
-            startMessage();
+                System.out.println("--------------*****---------");
+                startMessage();
         }
 
     }
